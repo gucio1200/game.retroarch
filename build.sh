@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-RETROARCH=v1.15.0
-LIBREELEC=11.0.1
+RETROARCH=v1.16.0.3
+LIBREELEC=11.0.3
 
 build(){
   VULKAN=$(wget -O - https://github.com/LibreELEC/LibreELEC.tv/raw/${LIBREELEC}/packages/graphics/vulkan/vulkan-headers/package.mk | grep PKG_VERSION= | sed -E 's/.*="(.*)"/v\1/')

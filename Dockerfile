@@ -7,12 +7,12 @@ RUN apt-get update && apt-get install -y \
     meson cmake glslang-tools python3-mako pkg-config autoconf libtool \
     libasound2-dev libudev-dev libgbm-dev libdrm-dev \
     llvm-15 libelf-dev byacc flex \
-    libpng-dev libgif-dev libjpeg-dev libcdio-dev libcdio++-dev libcrossguid-dev liblzo2-dev libass-dev libcurl4-openssl-dev libfstrcmp-dev libssl-dev libsqlite3-dev libtinyxml-dev libinput-dev libxkbcommon-dev flatbuffers-compiler libflatbuffers-dev
+    libpng-dev libgif-dev libjpeg-dev libcdio-dev libcdio++-dev libcrossguid-dev liblzo2-dev libass-dev libcurl4-openssl-dev libfstrcmp-dev libssl-dev libsqlite3-dev libtinyxml-dev libinput-dev libxkbcommon-dev flatbuffers-compiler libflatbuffers-dev libx11-dev libxext-dev libxxf86vm-dev libxv-dev libxrandr-dev xcb libxcb-xkb-dev x11-xkb-utils libx11-xcb-dev libxkbcommon-x11-dev
 
 
-ARG VULKAN=v1.3.204 \
-    MESA=mesa-22.3.0 \
-    RETROARCH=v1.15.0 \
+ARG VULKAN=v1.3.261 \
+    MESA=mesa-23.2.1 \
+    RETROARCH=v1.16.0.3 \
     MUPEN64PLUS=develop \
     KODI=20.1-Nexus
 
@@ -140,10 +140,7 @@ RUN mkdir -p /buildkit/mesa/build-vulkan \
 
 
 RUN cd /buildkit/RetroArch \
- && export CFLAGS="-DMESA_EGL_NO_X11_HEADERS -DEGL_NO_X11" \
- && export CXXFLAGS="-DMESA_EGL_NO_X11_HEADERS -DEGL_NO_X11" \
  && ./configure \
-        --disable-x11 \
         --disable-ibxm \
         --disable-winrawinput \
         --enable-udev \
@@ -157,6 +154,9 @@ RUN cd /buildkit/RetroArch \
         --enable-alsa \
         --enable-egl \
         --enable-kms \
+        --enable-xvideo \
+        --enable-x11 \
+        --enable-xrandr \
         --disable-opengl \
         --disable-opengl1 \
         --enable-opengl_core \
